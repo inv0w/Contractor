@@ -10,4 +10,8 @@
     <img src='{{ image }}' alt='Image Unavailable' max-width=30% height=auto>
 {% endfor %}
 <p><a href='/products/{{ product._id }}/edit'>Edit</a></p>
+<!-- Delete button -->
+<p><form method='POST' action='/products/{{ product._id }}/delete'>
+    <button type='submit'>Delete</button>
+</form></p>
 {% endblock %}

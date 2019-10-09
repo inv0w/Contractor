@@ -69,6 +69,12 @@ def products_update(product_id):
         {'$set': updated_product})
     return redirect(url_for('products_show', product_id=product_id))
 
+@app.route('/products/<product_id>/delete', methods=['POST'])
+def products_delete(product_id):
+    """Delete one product."""
+    products.delete_one({'_id': ObjectId(product_id)})
+    return redirect(url_for('products_index'))
+
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=os.environ.get('PORT', 5000))
