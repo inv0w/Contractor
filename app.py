@@ -25,13 +25,13 @@ def index():
 
 @app.route('/products')
 def products_index():
-    """Show all playlists."""
+    """Show all products."""
     return render_template('products_index.html', products=products.find())
 
 @app.route('/products/new')
 def products_new():
     """Create a new product."""
-    return render_template('products_new.html')
+    return render_template('products_new.html', product={}, title='New Product')
 
 @app.route('/products', methods=['POST'])
 def products_submit():
@@ -49,6 +49,25 @@ def products_show(product_id):
     """Show a single product."""
     product = products.find_one({'_id': ObjectId(product_id)})
     return render_template('products_show.html', product=product)
+
+@app.route('/products/<product_id>/edit')
+def products_edit(product_id):
+    """Show the edit form for a product."""
+    product = products.find_one({'_id': ObjectId(product_id)})
+    return render_template('products_edit.html', product=product, title='Edit Product')
+
+@app.route('/products/<product_id>', methods=['POST'])
+def products_update(product_id):
+    """Submit an edited product."""
+    updated_product = {
+        'title': request.form.get('title'),
+        'description': request.form.get('description'),
+        'images': request.form.get('images').split()
+    }
+    products.update_one(
+        {'_id': ObjectId(product_id)},
+        {'$set': updated_product})
+    return redirect(url_for('products_show', product_id=product_id))
 
 
 if __name__ == '__main__':

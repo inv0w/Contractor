@@ -1,8 +1,8 @@
-<!-- templates/products_new.html -->
+<!-- templates/products_edit.html -->
 {% extends 'base.html' %}
 
 {% block content %}
-<form method='POST' action='/products'>
+<form method='POST' action='/products/{{product._id}}'>
     {% include 'partials/products_form.html' %}
 </form>
 {% endblock %}

@@ -1,0 +1,28 @@
+<!-- templates/partials/products_form.html -->
+
+<fieldset>
+<legend>{{ title }}</legend>
+<!-- TITLE -->
+<p>
+    <label for='product-title'>Title</label><br>
+    <input id='product-title' type='text' name='title' value='{{ product.title }}'/>
+</p>
+
+<!-- DESCRIPTION -->
+<p>
+  <label for='description'>Description</label><br>
+  <input id='description' type='text' name='description' value='{{ product.description }}' />
+</p>
+
+<!-- VIDEO LINKS -->
+<p>
+  <label for='product-images'>Images</label><br>
+  <p>Add images in form of  'https://www.imgur.com/images.png' Separate with a newline.</p>
+  <textarea id='product-images' name='images' rows='10'>{{ "\n".join(product.images) }}</textarea>
+</p>
+</fieldset>
+
+<!-- BUTTON -->
+<p>
+    <button type='submit'>Save product</button>
+</p>

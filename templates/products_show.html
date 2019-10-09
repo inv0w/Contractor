@@ -9,4 +9,5 @@
 {% for image in product.images %}
     <img src='{{ image }}' alt='Image Unavailable' max-width=30% height=auto>
 {% endfor %}
+<p><a href='/products/{{ product._id }}/edit'>Edit</a></p>
 {% endblock %}
