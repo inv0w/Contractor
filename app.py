@@ -1,4 +1,13 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for
+from pymongo import MongoClient
+import os
+
+
+host = os.environ.get('MONGODB_URI', 'mongodb://localhost:27017/Contractor')
+client = MongoClient(host=f'{host}?retryWrites=false')
+db = client.get_default_database()
+products = db.products
+
 
 app = Flask(__name__)
 
@@ -17,8 +26,6 @@ products = [
 def products_index():
     """Show all playlists."""
     return render_template('products_index.html', products=products)
-
-
 
 if __name__ == '__main__':
     app.run(debug=True)
