@@ -18,15 +18,38 @@ def index():
     return render_template('home.html', msg='Home Message')
 
 # OUR MOCK ARRAY OF Store Products
-products = [
-    { 'title': 'Dragon Kite', 'description': 'Wow dragon' },
-    { 'title': 'Bunny Kite', 'description': 'wow bunny' }
-]
+# products = [
+#     { 'title': 'Dragon Kite', 'description': 'Wow dragon' },
+#     { 'title': 'Bunny Kite', 'description': 'wow bunny' }
+# ]
 
 @app.route('/products')
 def products_index():
     """Show all playlists."""
-    return render_template('products_index.html', products=products)
+    return render_template('products_index.html', products=products.find())
+
+@app.route('/products/new')
+def products_new():
+    """Create a new product."""
+    return render_template('products_new.html')
+
+@app.route('/products', methods=['POST'])
+def products_submit():
+    """Submit a new product."""
+    product = {
+        'title': request.form.get('title'),
+        'description': request.form.get('description'),
+        'images': request.form.get('images').split()
+    }
+    product_id = products.insert_one(product).inserted_id
+    return redirect(url_for('products_show', product_id=product_id))
+
+@app.route('/products/<product_id>')
+def products_show(product_id):
+    """Show a single product."""
+    product = products.find_one({'_id': ObjectId(product_id)})
+    return render_template('products_show.html', product=product)
+
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=os.environ.get('PORT', 5000))

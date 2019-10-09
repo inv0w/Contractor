@@ -1,0 +1,32 @@
+<!-- templates/products_new.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<form method='POST' action='/products'>
+    <fieldset>
+    <legend>New Product</legend>
+    <!-- TITLE -->
+    <p>
+        <label for='title'>Title</label><br>
+        <input type='text' name='title' />
+    </p>
+
+    <!-- Description -->
+    <p>
+        <label for='description'>Description</label><br>
+        <input type='text' name='description' />
+    </p>
+    <!-- Image LINKS -->
+    <p>
+        <label for='product-images'>Images</label><br>
+        <p>Add images in form of  'https://www.imgur.com/images.png' Separate with a newline.</p>
+        <textarea id='product-images' name='images' rows='10'></textarea>
+    </p>
+    </fieldset>
+
+    <!-- BUTTON -->
+    <p>
+        <button type='submit'>Save Product</button>
+    </p>
+</form>
+{% endblock %}
