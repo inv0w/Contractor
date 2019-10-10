@@ -10,11 +10,12 @@ host = os.environ.get('MONGODB_URI', 'mongodb://localhost:27017/Contractor')
 client = MongoClient(host=f'{host}?retryWrites=false')
 db = client.get_default_database()
 products = db.products
+reviews = db.reviews
+wish_list = db.wish_list
+
 #Clears Database and Adds Static Objects
 kites = createProducts(products)
 kites.create_database()
-reviews = db.reviews
-wish_list = db.wish_list
 
 app = Flask(__name__)
 
