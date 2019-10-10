@@ -12,7 +12,6 @@ products = db.products
 reviews = db.reviews
 wish_list = db.wish_list
 
-# wish_list = wish_list.delete_many({})
 
 app = Flask(__name__)
 
@@ -21,11 +20,6 @@ def index():
     """Return homepage."""
     return render_template('home.html')
 
-# OUR MOCK ARRAY OF Store Products
-# products = [
-#     { 'title': 'Dragon Kite', 'description': 'Wow dragon' },
-#     { 'title': 'Bunny Kite', 'description': 'wow bunny' }
-# ]
 
 @app.route('/products')
 def products_index():
@@ -114,7 +108,7 @@ def wish_list_add(product_id):
         'description': products.find_one({'_id': ObjectId(product_id)})['description'],
         'price': products.find_one({'_id': ObjectId(product_id)})['price']
     }
-    wish_id = wish_list.insert_one(add_wish).inserted_id
+    wish_list.insert_one(add_wish)
     return redirect(url_for('products_show', product_id=product_id))
 
 @app.route('/products/<product_id>/wish/delete', methods=['POST'])
