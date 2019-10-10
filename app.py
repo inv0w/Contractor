@@ -10,7 +10,9 @@ client = MongoClient(host=f'{host}?retryWrites=false')
 db = client.get_default_database()
 products = db.products
 reviews = db.reviews
+wish_list = db.wish_list
 
+# wish_list = wish_list.delete_many({})
 
 app = Flask(__name__)
 
@@ -97,6 +99,29 @@ def reviews_delete(review_id):
     review = reviews.find_one({'_id': ObjectId(review_id)})
     reviews.delete_one({'_id': ObjectId(review_id)})
     return redirect(url_for('products_show', product_id=review.get('product_id')))
+
+@app.route('/wishlist')
+def wish_list_index():
+    """Show Wish List."""
+    return render_template('wish_list.html', wish_list=wish_list.find())
+
+@app.route('/products/<product_id>/wish', methods=['POST'])
+def wish_list_add(product_id):
+    """Adds wish to wishlist."""
+    add_wish = {
+        'product_id': product_id,
+        'name': products.find_one({'_id': ObjectId(product_id)})['title'],
+        'description': products.find_one({'_id': ObjectId(product_id)})['description'],
+        'price': products.find_one({'_id': ObjectId(product_id)})['price']
+    }
+    wish_id = wish_list.insert_one(add_wish).inserted_id
+    return redirect(url_for('products_show', product_id=product_id))
+
+@app.route('/products/<product_id>/wish/delete', methods=['POST'])
+def wish_delete(product_id):
+    """Deletes wish from wishlist."""
+    wish_list.delete_one({'_id': ObjectId(product_id)})
+    return render_template('wish_list.html', wish_list=wish_list.find())
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=os.environ.get('PORT', 5000))

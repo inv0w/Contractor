@@ -8,6 +8,9 @@
         <h1>{{ product.title }}</h1>
         <h2>{{ product.description }}</h2>
         <h3>${{ product.price }}</h3>
+        <h4><form method='POST' action='/products/{{ product._id }}/wish'>
+            <button class='btn btn-primary' type='submit'>Add to Wishlist</button>
+        </form></h4>
         {% for image in product.images %}
             <div class="card"><div class="card-body">
                 <img width=50% height=width src="{{ image }}"></img>
