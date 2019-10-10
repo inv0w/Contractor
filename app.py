@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 from pymongo import MongoClient
 from bson.objectid import ObjectId
+from create_products import createProducts
 from static import *
 import os
 
@@ -19,7 +20,6 @@ app = Flask(__name__)
 def index():
     """Return homepage."""
     return render_template('home.html')
-
 
 @app.route('/products')
 def products_index():
@@ -119,3 +119,5 @@ def wish_delete(product_id):
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=os.environ.get('PORT', 5000))
+    kites = createProducts(products)
+    kites.create_database()
