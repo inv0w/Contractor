@@ -9,7 +9,7 @@ import os
 host = os.environ.get('MONGODB_URI', 'mongodb://localhost:27017/Contractor')
 client = MongoClient(host=f'{host}?retryWrites=false')
 db = client.get_default_database()
-products = db.products
+products = db['products']
 reviews = db.reviews
 wish_list = db.wish_list
 
