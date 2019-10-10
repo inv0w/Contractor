@@ -1,28 +1,21 @@
-<!-- templates/partials/products_form.html -->
-
 <fieldset>
-<legend>{{ title }}</legend>
-<!-- TITLE -->
-<p>
-    <label for='product-title'>Title</label><br>
-    <input id='product-title' type='text' name='title' value='{{ product.title }}'/>
-</p>
+    <legend>{{ title }}</legend>
+    <!-- TITLE -->
+    <div class='form-group'>
+        <label for='product-title'>Title</label><br>
+        <input class='form-control' id='product-title' type='text' name='title' value='{{ product.title }}'/>
+    </div>
 
-<!-- DESCRIPTION -->
-<p>
-  <label for='description'>Description</label><br>
-  <input id='description' type='text' name='description' value='{{ product.description }}' />
-</p>
+    <!-- DESCRIPTION -->
+    <div class='form-group'>
+        <label for='description'>Description</label><br>
+        <input class='form-control' id='description' type='text' name='description' value='{{ product.description }}' />
+    </div>
 
-<!-- VIDEO LINKS -->
-<p>
-  <label for='product-images'>Images</label><br>
-  <p>Add images in form of  'https://www.imgur.com/images.png' Separate with a newline.</p>
-  <textarea id='product-images' name='images' rows='10'>{{ "\n".join(product.images) }}</textarea>
-</p>
+    <!-- VIDEO LINKS -->
+    <div class='form-group'>
+        <label for='product-images'>Images</label><br/>
+        <p class='text-muted'>Add images in the form of 'https://google.com/fairy/fred.png'  <br/> Separate with a newline.</p>
+        <textarea class='form-control' id='product-images' name='images' rows='10'>{{ "\n".join(product.images) }}</textarea>
+    </div>
 </fieldset>
-
-<!-- BUTTON -->
-<p>
-    <button type='submit'>Save product</button>
-</p>

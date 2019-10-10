@@ -2,16 +2,29 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<a href='/products'>Back to Store</a>
-
-<h1>{{ product.title }}</h1>
-<h2>{{ product.description }}</h2>
-{% for image in product.images %}
-    <img src='{{ image }}' alt='Image Unavailable' max-width=30% height=auto>
-{% endfor %}
-<p><a href='/products/{{ product._id }}/edit'>Edit</a></p>
-<!-- Delete button -->
-<p><form method='POST' action='/products/{{ product._id }}/delete'>
-    <button type='submit'>Delete</button>
-</form></p>
+<a href='/'>Back to Home</a>
+<div class='row'>
+    <div class='col-sm-3 col-sm-offset-3'>
+        <h1>{{ product.title }}</h1>
+        <h2>{{ product.description }}</h2>
+        {% for image in product.images %}
+            <div class="card"><div class="card-body">
+                <img width=25% height=auto src="{{ image }}"></img>
+            </div></div>
+        {% endfor %}
+        <p><a href='/products/{{ product._id }}/edit'>Edit</a></p>
+        <p><form method='POST' action='/products/{{ product._id }}/delete'>
+            <input type='hidden' name='_method' value='DELETE'>
+            <button class='btn btn-primary' type='submit'>Delete</button>
+        </form></p>
+        <hr>
+        <!-- review form -->
+        {% include 'partials/review_form.html' %}
+        <hr>
+        <!-- Show reviews -->
+        {% for review in reviews %}
+            {% include 'partials/review.html' %}
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}

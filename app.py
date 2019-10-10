@@ -8,6 +8,7 @@ host = os.environ.get('MONGODB_URI', 'mongodb://localhost:27017/Contractor')
 client = MongoClient(host=f'{host}?retryWrites=false')
 db = client.get_default_database()
 products = db.products
+reviews = db.reviews
 
 
 app = Flask(__name__)
@@ -48,7 +49,8 @@ def products_submit():
 def products_show(product_id):
     """Show a single product."""
     product = products.find_one({'_id': ObjectId(product_id)})
-    return render_template('products_show.html', product=product)
+    product_reviews = reviews.find({'product_id': ObjectId(product_id)})
+    return render_template('products_show.html', product=product, reviews=product_reviews)
 
 @app.route('/products/<product_id>/edit')
 def products_edit(product_id):
@@ -75,6 +77,23 @@ def products_delete(product_id):
     products.delete_one({'_id': ObjectId(product_id)})
     return redirect(url_for('products_index'))
 
+@app.route('/products/reviews', methods=['POST'])
+def reviews_new():
+    """Submit a new review."""
+    review = {
+        'title': request.form.get('title'),
+        'content': request.form.get('content'),
+        'product_id': ObjectId(request.form.get('product_id'))
+    }
+    review_id = reviews.insert_one(review).inserted_id
+    return redirect(url_for('products_show', product_id=request.form.get('product_id')))
+
+@app.route('/products/reviews/<review_id>', methods=['POST'])
+def reviews_delete(review_id):
+    """Action to delete a review."""
+    review = reviews.find_one({'_id': ObjectId(review_id)})
+    reviews.delete_one({'_id': ObjectId(review_id)})
+    return redirect(url_for('products_show', product_id=review.get('product_id')))
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=os.environ.get('PORT', 5000))

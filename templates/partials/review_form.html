@@ -1,0 +1,32 @@
+<!-- templates/partials/review_form.html -->
+
+<form action='/products/reviews' method='post'>
+    <input type='hidden' value='{{ product._id }}' name='product_id'/>
+    <fieldset>
+        <legend>Add a review</legend>
+        <!-- TITLE -->
+        <div class='form-group'>
+            <label for='review-title'>Title</label><br>
+            <input class='form-control'
+                id='review-title'
+                type='text'
+                name='title'
+                placeholder='Title'/>
+        </div>
+
+        <!-- DESCRIPTION -->
+        <div class='form-group'>
+            <label for='review-content'>Description</label><br>
+            <textarea class='form-control'
+                id='review-content'
+                name='content'
+                rows='10'
+                placeholder='Your review...'></textarea>
+        </div>
+    </fieldset>
+
+    <!-- BUTTON -->
+    <div class='form-group'>
+        <button class='btn btn-primary' type='submit'>Save review</button>
+    </div>
+</form>

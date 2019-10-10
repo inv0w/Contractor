@@ -1,8 +1,16 @@
-<!-- templates/products_new.html -->
+<!-- templates/playlists_new.html -->
 {% extends 'base.html' %}
 
 {% block content %}
-<form method='POST' action='/products'>
-    {% include 'partials/products_form.html' %}
-</form>
+<div class='row'>
+    <div class='col-sm-6 col-sm-offset-3'>
+        <form method='POST' action='/products'>
+            {% include 'partials/products_form.html' %}
+            <!-- BUTTON -->
+            <div class='form-group'>
+                <button class='btn btn-primary' type='submit'>Save Product</button>
+            </div>
+        </form>
+    </div>
+</div>
 {% endblock %}
