@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 from pymongo import MongoClient
 from bson.objectid import ObjectId
+from static import *
 import os
 
 
@@ -16,7 +17,7 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     """Return homepage."""
-    return render_template('home.html', msg='Home Message')
+    return render_template('home.html')
 
 # OUR MOCK ARRAY OF Store Products
 # products = [
@@ -40,7 +41,8 @@ def products_submit():
     product = {
         'title': request.form.get('title'),
         'description': request.form.get('description'),
-        'images': request.form.get('images').split()
+        'images': request.form.get('images').split(),
+        'price': request.form.get('price')
     }
     product_id = products.insert_one(product).inserted_id
     return redirect(url_for('products_show', product_id=product_id))
@@ -64,7 +66,8 @@ def products_update(product_id):
     updated_product = {
         'title': request.form.get('title'),
         'description': request.form.get('description'),
-        'images': request.form.get('images').split()
+        'images': request.form.get('images').split(),
+        'price': request.form.get('price')
     }
     products.update_one(
         {'_id': ObjectId(product_id)},

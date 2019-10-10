@@ -18,4 +18,11 @@
         <p class='text-muted'>Add images in the form of 'https://google.com/fairy/fred.png'  <br/> Separate with a newline.</p>
         <textarea class='form-control' id='product-images' name='images' rows='10'>{{ "\n".join(product.images) }}</textarea>
     </div>
+
+    <!-- Price -->
+    <div class='form-group'>
+        <label for='price'>Price</label><br>
+        <input class='form-control' id='price' type='text' name='price' value='{{ product.price }}'/>
+    </div>
+
 </fieldset>

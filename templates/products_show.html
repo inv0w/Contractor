@@ -2,14 +2,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<a href='/'>Back to Home</a>
+<a href='/products'>Back to Products</a>
 <div class='row'>
-    <div class='col-sm-3 col-sm-offset-3'>
+    <div class='col-sm-5'>
         <h1>{{ product.title }}</h1>
         <h2>{{ product.description }}</h2>
+        <h3>${{ product.price }}</h3>
         {% for image in product.images %}
             <div class="card"><div class="card-body">
-                <img width=25% height=auto src="{{ image }}"></img>
+                <img width=50% height=width src="{{ image }}"></img>
             </div></div>
         {% endfor %}
         <p><a href='/products/{{ product._id }}/edit'>Edit</a></p>
@@ -17,14 +18,17 @@
             <input type='hidden' name='_method' value='DELETE'>
             <button class='btn btn-primary' type='submit'>Delete</button>
         </form></p>
-        <hr>
-        <!-- review form -->
-        {% include 'partials/review_form.html' %}
+    </div>
+
+    <div class='col-sm-5'>
         <hr>
         <!-- Show reviews -->
         {% for review in reviews %}
             {% include 'partials/review.html' %}
         {% endfor %}
+        <!-- review form -->
+        {% include 'partials/review_form.html' %}
+        <hr>
     </div>
 </div>
 {% endblock %}

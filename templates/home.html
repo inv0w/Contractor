@@ -2,7 +2,16 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>{{ msg }}</h1>
+ <style type="text/css">
+.jumbotron {
+    background: none
+}
+</style>
+<div class="jumbotron text-center">
+    <h1>World of Kites</h1>
+    <p>Don't fight, buy a kite</p>
+    <a href='/products'>Check out our Products</a>
+</div>
 
-<a href='/products'>List of Products</a>
+
 {% endblock %}
