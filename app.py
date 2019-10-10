@@ -13,6 +13,9 @@ products = db.products
 reviews = db.reviews
 wish_list = db.wish_list
 
+#Clears Database and Adds Static Objects
+kites = createProducts(products)
+kites.create_database()
 
 app = Flask(__name__)
 
@@ -119,5 +122,3 @@ def wish_delete(product_id):
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=os.environ.get('PORT', 5000))
-    kites = createProducts(products)
-    kites.create_database()

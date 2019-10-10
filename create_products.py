@@ -2,38 +2,38 @@ from pymongo import MongoClient
 from bson.objectid import ObjectId
 
 product_1 = {
-    'name': 'Standard Hawaii Sock',
+    'title': 'Bird Kite',
     'price': 27.99,
-    'description': "Your go-to sock when travelling to the tropics",
-    'images': "/static/birdkite1.jpg"
+    'description': "Flying beautifully in the sky.",
+    'image': "/static/birdkite.jpg"
 }
 
 product_2 = {
-    'name': 'Standard Hawaii Sock',
+    'title': 'Butterfly Kite',
     'price': 18.99,
-    'description': "Your go-to sock when travelling to the tropics",
-    'images': "/static/butterkite1.jpg"
+    'description': "So beauitful yet so fragile.",
+    'image': "/static/butterkite2.jpg"
 }
 
 product_3 = {
-    'name': 'Standard Hawaii Sock',
+    'title': 'Rainbow Kite',
     'price': 19.99,
-    'description': "Your go-to sock when travelling to the tropics",
-    'images': "/static/lgbtkite.jpg"
+    'description': "For all your colorful wants and needs.",
+    'image': "/static/lgbtkite.jpg"
 }
 
 product_4 = {
-    'name': 'Standard Hawaii Sock',
+    'title': 'Snake Kite',
     'price': 14.95,
-    'description': "Your go-to sock when travelling to the tropics",
-    'images': "/static/snakekite.jpg"
+    'description': "Slithering through the night sky.",
+    'image': "/static/snakekite.jpg"
 }
 
 product_5 = {
-    'name': 'Standard Hawaii Sock',
-    'price': 21.95,
-    'description': "Your go-to sock when travelling to the tropics",
-    'images': "/static/butterkite3.jpg"
+    'title': 'Dragon Kite',
+    'price': 61.95,
+    'description': "A dragon, what else could you ask for.",
+    'image': "/static/dragonkite.jpg"
 }
 
 product_list = [product_1, product_2, product_3, product_4, product_5]

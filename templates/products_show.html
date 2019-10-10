@@ -11,11 +11,9 @@
         <h4><form method='POST' action='/products/{{ product._id }}/wish'>
             <button class='btn btn-primary' type='submit'>Add to Wishlist</button>
         </form></h4>
-        {% for image in product.images %}
             <div class="card"><div class="card-body">
-                <img width=50% height=width src="{{ image }}"></img>
+                <img width=50% height=width src="{{ product.image }}"></img>
             </div></div>
-        {% endfor %}
         <p><a href='/products/{{ product._id }}/edit'>Edit</a></p>
         <p><form method='POST' action='/products/{{ product._id }}/delete'>
             <input type='hidden' name='_method' value='DELETE'>
